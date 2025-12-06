@@ -118,7 +118,7 @@ $ultimos_pedidos = $pdo->query($sql_lista)->fetchAll(PDO::FETCH_ASSOC);
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Hora</th>
+                        <th>Fecha/Hora</th>
                         <th>Cliente</th>
                         <th>Total</th>
                         <th>Estado</th>
@@ -128,7 +128,10 @@ $ultimos_pedidos = $pdo->query($sql_lista)->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($ultimos_pedidos as $p): ?>
                     <tr>
                         <td><strong>#<?php echo $p['id']; ?></strong></td>
-                        <td><?php echo date('H:i', strtotime($p['fecha'])); ?></td>
+                        <td>
+                            <div><?php echo date('d/m/Y', strtotime($p['fecha'])); ?></div>
+                            <small style="color: #888;"><?php echo date('H:i', strtotime($p['fecha'])); ?></small>
+                        </td>
                         <td><?php echo $p['cliente']; ?></td>
                         <td>S/ <?php echo number_format($p['total'], 2); ?></td>
                         <td>
