@@ -1,10 +1,15 @@
 <?php
 include 'conexion.php';
 
-// Si recibimos una petición para "Despachar"
+// --- CORRECCIÓN DE SEGURIDAD CRÍTICA ---
+// Antes: $pdo->query("... WHERE id = $id"); (Vulnerable a inyección SQL)
+// Ahora: Usamos prepare() para blindar la consulta.
 if (isset($_POST['completar_id'])) {
     $id = $_POST['completar_id'];
-    $pdo->query("UPDATE pedidos SET estado = 'completado' WHERE id = $id");
+    
+    $stmt = $pdo->prepare("UPDATE pedidos SET estado = 'completado' WHERE id = ?");
+    $stmt->execute([$id]);
+    
     header("Location: cocina.php");
     exit;
 }
@@ -127,61 +132,4 @@ foreach ($filas as $fila) {
 
         /* BOTÓN LISTO */
         .btn-listo { 
-            width: 100%; padding: 15px; 
-            background: #28a745; 
-            color: white; 
-            border: none; 
-            font-weight: bold; font-size: 1.2rem; cursor: pointer; 
-            text-transform: uppercase;
-        }
-        .btn-listo:hover { background: #218838; }
-
-        .vacio { text-align: center; color: #ffcc00; margin-top: 50px; font-size: 1.5rem; opacity: 0.7; }
-
-        @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-    </style>
-</head>
-<body>
-
-    <h1>🔥 Cocina Happy Chicken 🔥</h1>
-
-    <div class="grid-tickets">
-        <?php if (empty($tickets)): ?>
-            <div class="vacio">Todo tranquilo por ahora... 👨‍🍳</div>
-        <?php else: ?>
-            
-            <?php foreach ($tickets as $id => $ticket): ?>
-            <div class="ticket">
-                <div class="ticket-header">
-                    <span class="cliente"><?php echo $ticket['cliente']; ?></span>
-                    <span class="hora"><?php echo $ticket['hora']; ?></span>
-                </div>
-
-                <div class="ticket-body">
-                    <?php foreach ($ticket['items'] as $item): ?>
-                    <div class="item">
-                        <span class="cantidad"><?php echo $item['cantidad']; ?></span> 
-                        <strong><?php echo $item['producto']; ?></strong>
-                        
-                        <?php if (!empty($item['notas'])): ?>
-                            <span class="notas">⚠️ <?php echo $item['notas']; ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-
-                <form method="POST">
-                    <input type="hidden" name="completar_id" value="<?php echo $id; ?>">
-                    <button type="submit" class="btn-listo">✅ Pedido Listo</button>
-                </form>
-            </div>
-            <?php endforeach; ?>
-
-        <?php endif; ?>
-    </div>
-
-</body>
-</html>
+            width: 100
