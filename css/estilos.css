@@ -1,0 +1,271 @@
+/* =========================================
+   DISEÑO CORPORATIVO "HAPPY CHICKEN" - FINAL
+   ========================================= */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  display: flex;
+  height: 100vh;
+  background-color: #fff8e1;
+  overflow: hidden;
+}
+
+.menu-container {
+  width: 65%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-categorias {
+  background-color: #ff6600;
+  padding: 15px;
+  white-space: nowrap;
+  overflow-x: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-categorias a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 20px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.3s;
+}
+
+.nav-categorias a:hover {
+  background: #ffcc00;
+  color: #5c3a21;
+}
+
+.scroll-productos {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.categoria-titulo {
+  font-size: 1.5rem;
+  color: #5c3a21;
+  border-bottom: 3px solid #ffcc00;
+  margin-top: 25px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.card-producto {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, border 0.2s;
+  border: 2px solid transparent;
+}
+
+.card-producto:hover {
+  transform: translateY(-5px);
+  border-color: #ff6600;
+}
+.card-producto:active {
+  transform: scale(0.95);
+  background-color: #ffcc00;
+}
+
+.emoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.nombre-prod {
+  font-weight: bold;
+  color: #333;
+  font-size: 0.9rem;
+  display: block;
+  height: 40px;
+  overflow: hidden;
+  white-space: normal;
+}
+
+.precio {
+  color: #d35400;
+  font-weight: 900;
+  font-size: 1.2rem;
+  margin-top: 8px;
+  display: block;
+}
+
+.carrito-container {
+  width: 35%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #ddd;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.carrito-header {
+  padding: 20px;
+  background: #5c3a21;
+  color: white;
+  text-align: center;
+}
+.carrito-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.carrito-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background: #fffbf0;
+}
+
+.item-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.btn-borrar {
+  color: #ff0000;
+  font-weight: bold;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.carrito-footer {
+  padding: 20px;
+  background: white;
+  border-top: 2px dashed #ffcc00;
+}
+.total {
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-align: right;
+  color: #5c3a21;
+  margin-bottom: 15px;
+}
+
+button.procesar {
+  width: 100%;
+  padding: 15px;
+  background: #ff6600;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 102, 0, 0.4);
+}
+button.procesar:hover {
+  background: #e65c00;
+}
+
+/* === ESTILOS DE LA VENTANA EMERGENTE (MODAL) === */
+.modal-overlay {
+  display: none; /* ESTO ES LO QUE LA OCULTA AL PRINCIPIO */
+  position: fixed; /* ESTO LA HACE FLOTAR ENCIMA */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-caja {
+  background: white;
+  width: 90%;
+  max-width: 400px;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  border-top: 5px solid #ff6600;
+}
+
+textarea#texto-nota {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.modal-botones {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-cancelar {
+  flex: 1;
+  padding: 12px;
+  background: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-confirmar-nota {
+  flex: 2;
+  padding: 12px;
+  background: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    overflow: auto;
+  }
+  .menu-container {
+    width: 100%;
+    height: 60vh;
+  }
+  .carrito-container {
+    width: 100%;
+    height: 40vh;
+    border-left: none;
+    border-top: 2px solid #5c3a21;
+  }
+  .nav-categorias {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+}
